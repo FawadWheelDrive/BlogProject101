@@ -3080,3 +3080,1015 @@ Processing by ArticlesController#show as HTML
 Completed 200 OK in 57ms (Views: 51.1ms | ActiveRecord: 0.7ms)
 
 
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rake:9
+Migrating to CreateTags (20180529051117)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rake:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20180529051117_create_tags.rb:3
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "tags" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20180529051117_create_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180529051117"]]
+  ↳ bin/rake:9
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rake:9
+Migrating to CreateTaggings (20180529051133)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rake:9
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "taggings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "tag_id" integer, "article_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_9fcd2e236b"
+FOREIGN KEY ("tag_id")
+  REFERENCES "tags" ("id")
+, CONSTRAINT "fk_rails_50f62c287b"
+FOREIGN KEY ("article_id")
+  REFERENCES "articles" ("id")
+)[0m
+  ↳ db/migrate/20180529051133_create_taggings.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_tag_id" ON "taggings" ("tag_id")[0m
+  ↳ db/migrate/20180529051133_create_taggings.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_taggings_on_article_id" ON "taggings" ("article_id")[0m
+  ↳ db/migrate/20180529051133_create_taggings.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180529051133"]]
+  ↳ bin/rake:9
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rake:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rake:9
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rake:9
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rake:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rake:9
+Started GET "/articles/2" for 127.0.0.1 at 2018-05-28 22:17:03 -0700
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/joeyfawad/.rvm/gems/ruby-2.3.4/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  ↳ app/views/articles/show.html.erb:5
+  Rendered collection of articles/_comment.html.erb [1 times] (0.9ms)
+  Rendered comments/_form.html.erb (2.9ms)
+  Rendered articles/show.html.erb within layouts/application (18.5ms)
+Completed 200 OK in 93ms (Views: 55.1ms | ActiveRecord: 3.4ms)
+
+
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" ORDER BY "articles"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTag Create (0.7ms)[0m  [1m[32mINSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "tag1"], ["created_at", "2018-05-29 05:19:16.273058"], ["updated_at", "2018-05-29 05:19:16.273058"]]
+  [1m[36mTagging Create (0.4ms)[0m  [1m[32mINSERT INTO "taggings" ("tag_id", "article_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["tag_id", 1], ["article_id", 1], ["created_at", "2018-05-29 05:19:16.293798"], ["updated_at", "2018-05-29 05:19:16.293798"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTag Create (1.2ms)[0m  [1m[32mINSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "tag2"], ["created_at", "2018-05-29 05:19:24.128876"], ["updated_at", "2018-05-29 05:19:24.128876"]]
+  [1m[36mTagging Create (0.5ms)[0m  [1m[32mINSERT INTO "taggings" ("tag_id", "article_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["tag_id", 2], ["article_id", 1], ["created_at", "2018-05-29 05:19:24.136842"], ["updated_at", "2018-05-29 05:19:24.136842"]]
+  [1m[35m (5.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ? LIMIT ?[0m  [["article_id", 1], ["LIMIT", 11]]
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" ORDER BY "articles"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" ORDER BY "articles"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+Started GET "/articles/2" for 127.0.0.1 at 2018-05-28 22:30:27 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  ↳ app/views/articles/show.html.erb:5
+  Rendered collection of articles/_comment.html.erb [1 times] (1.0ms)
+  Rendered comments/_form.html.erb (20.5ms)
+  Rendered articles/show.html.erb within layouts/application (34.8ms)
+Completed 500 Internal Server Error in 77ms (ActiveRecord: 2.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_list' for #<Comment:0x007fec3298bdd8>):
+    11:   </p>
+    12:   <p>
+    13:     <%= f.label :tag_list %><br />
+    14:     <%= f.text_field :tag_list %>
+    15:   </p>
+    16:   <p>
+    17:     <%= f.submit 'Submit' %>
+  
+app/views/comments/_form.html.erb:14:in `block in _app_views_comments__form_html_erb__383131679684527849_70326176102600'
+app/views/comments/_form.html.erb:3:in `_app_views_comments__form_html_erb__383131679684527849_70326176102600'
+app/views/articles/show.html.erb:6:in `_app_views_articles_show_html_erb__295002967568924560_70326153538120'
+Started GET "/articles/2" for 127.0.0.1 at 2018-05-28 22:31:44 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  ↳ app/views/articles/show.html.erb:5
+  Rendered collection of articles/_comment.html.erb [1 times] (1.0ms)
+  Rendered comments/_form.html.erb (13.4ms)
+  Rendered articles/show.html.erb within layouts/application (28.4ms)
+Completed 500 Internal Server Error in 87ms (ActiveRecord: 2.8ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_list' for #<Comment:0x007fec32f38060>):
+    11:   </p>
+    12:   <p>
+    13:     <%= f.label :tag_list %><br />
+    14:     <%= f.text_field :tag_list %>
+    15:   </p>
+    16:   <p>
+    17:     <%= f.submit 'Submit' %>
+  
+app/views/comments/_form.html.erb:14:in `block in _app_views_comments__form_html_erb__383131679684527849_70326221819840'
+app/views/comments/_form.html.erb:3:in `_app_views_comments__form_html_erb__383131679684527849_70326221819840'
+app/views/articles/show.html.erb:6:in `_app_views_articles_show_html_erb__295002967568924560_70326205205920'
+Started GET "/" for 127.0.0.1 at 2018-05-28 22:31:48 -0700
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 39ms (Views: 34.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2018-05-28 22:31:49 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:5
+  Rendered collection of articles/_comment.html.erb [2 times] (1.7ms)
+  Rendered comments/_form.html.erb (13.6ms)
+  Rendered articles/show.html.erb within layouts/application (33.9ms)
+Completed 500 Internal Server Error in 59ms (ActiveRecord: 2.9ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_list' for #<Comment:0x007fec32251dd8>):
+    11:   </p>
+    12:   <p>
+    13:     <%= f.label :tag_list %><br />
+    14:     <%= f.text_field :tag_list %>
+    15:   </p>
+    16:   <p>
+    17:     <%= f.submit 'Submit' %>
+  
+app/views/comments/_form.html.erb:14:in `block in _app_views_comments__form_html_erb__383131679684527849_70326218297700'
+app/views/comments/_form.html.erb:3:in `_app_views_comments__form_html_erb__383131679684527849_70326218297700'
+app/views/articles/show.html.erb:6:in `_app_views_articles_show_html_erb__295002967568924560_70326215148140'
+Started GET "/articles/1" for 127.0.0.1 at 2018-05-28 22:33:08 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:5
+  Rendered collection of articles/_comment.html.erb [2 times] (1.3ms)
+  Rendered comments/_form.html.erb (13.1ms)
+  Rendered articles/show.html.erb within layouts/application (29.3ms)
+Completed 500 Internal Server Error in 73ms (ActiveRecord: 3.2ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_list' for #<Comment:0x007fec2d57a848>):
+    11:   </p>
+    12:   <p>
+    13:     <%= f.label :tag_list %><br />
+    14:     <%= f.text_field :tag_list %>
+    15:   </p>
+    16:   <p>
+    17:     <%= f.submit 'Submit' %>
+  
+app/views/comments/_form.html.erb:14:in `block in _app_views_comments__form_html_erb__383131679684527849_70326186071740'
+app/views/comments/_form.html.erb:3:in `_app_views_comments__form_html_erb__383131679684527849_70326186071740'
+app/views/articles/show.html.erb:6:in `_app_views_articles_show_html_erb__295002967568924560_70326186575680'
+Started GET "/articles/1" for 127.0.0.1 at 2018-05-28 22:33:09 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:5
+  Rendered collection of articles/_comment.html.erb [2 times] (1.1ms)
+  Rendered comments/_form.html.erb (19.2ms)
+  Rendered articles/show.html.erb within layouts/application (32.2ms)
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_list' for #<Comment:0x007fec32c384a0>):
+    11:   </p>
+    12:   <p>
+    13:     <%= f.label :tag_list %><br />
+    14:     <%= f.text_field :tag_list %>
+    15:   </p>
+    16:   <p>
+    17:     <%= f.submit 'Submit' %>
+  
+app/views/comments/_form.html.erb:14:in `block in _app_views_comments__form_html_erb__383131679684527849_70326141103000'
+app/views/comments/_form.html.erb:3:in `_app_views_comments__form_html_erb__383131679684527849_70326141103000'
+app/views/articles/show.html.erb:6:in `_app_views_articles_show_html_erb__295002967568924560_70326200727120'
+Started GET "/" for 127.0.0.1 at 2018-05-28 22:33:15 -0700
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 41ms (Views: 36.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2018-05-28 22:33:17 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:5
+  Rendered collection of articles/_comment.html.erb [2 times] (1.2ms)
+  Rendered comments/_form.html.erb (13.2ms)
+  Rendered articles/show.html.erb within layouts/application (24.9ms)
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 0.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_list' for #<Comment:0x007fec306b5e80>):
+    11:   </p>
+    12:   <p>
+    13:     <%= f.label :tag_list %><br />
+    14:     <%= f.text_field :tag_list %>
+    15:   </p>
+    16:   <p>
+    17:     <%= f.submit 'Submit' %>
+  
+app/views/comments/_form.html.erb:14:in `block in _app_views_comments__form_html_erb__383131679684527849_70326152211540'
+app/views/comments/_form.html.erb:3:in `_app_views_comments__form_html_erb__383131679684527849_70326152211540'
+app/views/articles/show.html.erb:6:in `_app_views_articles_show_html_erb__295002967568924560_70326200673380'
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" ORDER BY "articles"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+Started GET "/articles/1" for 127.0.0.1 at 2018-05-28 22:33:39 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:5
+  Rendered collection of articles/_comment.html.erb [2 times] (1.2ms)
+  Rendered comments/_form.html.erb (18.2ms)
+  Rendered articles/show.html.erb within layouts/application (31.3ms)
+Completed 500 Internal Server Error in 47ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_list' for #<Comment:0x007fec2a7d1770>):
+    11:   </p>
+    12:   <p>
+    13:     <%= f.label :tag_list %><br />
+    14:     <%= f.text_field :tag_list %>
+    15:   </p>
+    16:   <p>
+    17:     <%= f.submit 'Submit' %>
+  
+app/views/comments/_form.html.erb:14:in `block in _app_views_comments__form_html_erb__383131679684527849_70326173789620'
+app/views/comments/_form.html.erb:3:in `_app_views_comments__form_html_erb__383131679684527849_70326173789620'
+app/views/articles/show.html.erb:6:in `_app_views_articles_show_html_erb__295002967568924560_70326153120900'
+Started GET "/" for 127.0.0.1 at 2018-05-28 22:34:33 -0700
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 46ms (Views: 41.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/8" for 127.0.0.1 at 2018-05-28 22:34:35 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 8]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (12.5ms)
+  Rendered articles/show.html.erb within layouts/application (22.9ms)
+Completed 500 Internal Server Error in 43ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_list' for #<Comment:0x007fec295256d0>):
+    11:   </p>
+    12:   <p>
+    13:     <%= f.label :tag_list %><br />
+    14:     <%= f.text_field :tag_list %>
+    15:   </p>
+    16:   <p>
+    17:     <%= f.submit 'Submit' %>
+  
+app/views/comments/_form.html.erb:14:in `block in _app_views_comments__form_html_erb__383131679684527849_70326204018640'
+app/views/comments/_form.html.erb:3:in `_app_views_comments__form_html_erb__383131679684527849_70326204018640'
+app/views/articles/show.html.erb:6:in `_app_views_articles_show_html_erb__295002967568924560_70326141132900'
+Started GET "/articles/8" for 127.0.0.1 at 2018-05-28 22:36:41 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 8]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (13.2ms)
+  Rendered articles/show.html.erb within layouts/application (26.2ms)
+Completed 500 Internal Server Error in 42ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_list' for #<Comment:0x007fec32d68be0>):
+    11:   </p>
+    12:   <p>
+    13:     <%= f.label :tag_list %><br />
+    14:     <%= f.text_field :tag_list %>
+    15:   </p>
+    16:   <p>
+    17:     <%= f.submit 'Submit' %>
+  
+app/views/comments/_form.html.erb:14:in `block in _app_views_comments__form_html_erb__383131679684527849_70326216541900'
+app/views/comments/_form.html.erb:3:in `_app_views_comments__form_html_erb__383131679684527849_70326216541900'
+app/views/articles/show.html.erb:6:in `_app_views_articles_show_html_erb__295002967568924560_70326220953420'
+Started GET "/articles/8" for 127.0.0.1 at 2018-05-28 22:36:54 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 8]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (1.5ms)
+  Rendered articles/show.html.erb within layouts/application (12.1ms)
+Completed 200 OK in 53ms (Views: 47.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-28 22:36:59 -0700
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 64ms (Views: 57.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2018-05-28 22:37:01 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:5
+  Rendered collection of articles/_comment.html.erb [2 times] (1.1ms)
+  Rendered comments/_form.html.erb (1.8ms)
+  Rendered articles/show.html.erb within layouts/application (15.1ms)
+Completed 200 OK in 62ms (Views: 52.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2018-05-28 22:37:23 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 4]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (1.6ms)
+  Rendered articles/show.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 63ms (Views: 53.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:37:28 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (1.8ms)
+  Rendered articles/show.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 57ms (Views: 48.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:37:31 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.6ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (39.9ms)
+  Rendered articles/edit.html.erb within layouts/application (44.7ms)
+Completed 200 OK in 91ms (Views: 80.0ms | ActiveRecord: 2.3ms)
+
+
+Started PATCH "/articles/3" for 127.0.0.1 at 2018-05-28 22:37:38 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uQEuXXhtqgFMcCkOKknX/BSoM+MnHV0LQWAeCmkr15grKayLuFyHIymHYvZWZiiRJw9N8pbcj+kj62qcr4Cw+A==", "article"=>{"title"=>"Third Blog Post", "body"=>"I'm yet another step closer to creating my first blog from scratch. This is getting exciting.", "tag_list"=>"ruby, tagtest"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:41
+Unpermitted parameter: :tag_list
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+Redirected to http://0.0.0.0:3000/articles/3
+Completed 302 Found in 5ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:37:38 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (1.7ms)
+  Rendered articles/show.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 52ms (Views: 46.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:38:13 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (4.7ms)
+  Rendered articles/edit.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 53ms (Views: 44.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:39:05 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (15.7ms)
+  Rendered articles/edit.html.erb within layouts/application (19.9ms)
+Completed 200 OK in 77ms (Views: 52.5ms | ActiveRecord: 2.3ms)
+
+
+Started PATCH "/articles/3" for 127.0.0.1 at 2018-05-28 22:39:10 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"EROFvnTuWG8BaKECQio7hat5duShtQ5VKqp8HLNZZNKDOwdotN91TWSf6vo+BcTomN4I9RB03LdIIQiKdfIDsg==", "article"=>{"title"=>"Third Blog Post", "body"=>"I'm yet another step closer to creating my first blog from scratch. This is getting exciting.", "tag_list"=>"tagtest"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:41
+Unpermitted parameter: :tag_list
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+Redirected to http://0.0.0.0:3000/articles/3
+Completed 302 Found in 5ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:39:10 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (2.0ms)
+  Rendered articles/show.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 64ms (Views: 46.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:39:12 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (6.7ms)
+  Rendered articles/edit.html.erb within layouts/application (10.7ms)
+Completed 200 OK in 64ms (Views: 55.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:42:24 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (2.1ms)
+  Rendered articles/show.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 80ms (Views: 47.3ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:42:27 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (17.1ms)
+  Rendered articles/edit.html.erb within layouts/application (21.3ms)
+Completed 200 OK in 66ms (Views: 56.4ms | ActiveRecord: 1.5ms)
+
+
+Started PATCH "/articles/3" for 127.0.0.1 at 2018-05-28 22:42:32 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/JSugkbUdaOttMPZPHH9r0XHTRIz1oPhVfDwuvD/IDluvCxUhuVYgchDiCFAXgLCdmAzA4IXUQM3e4QsNlRHWQ==", "article"=>{"title"=>"Third Blog Post", "body"=>"I'm yet another step closer to creating my first blog from scratch. This is getting exciting.", "tag_list"=>"tagtest"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:41
+Unpermitted parameter: :tag_list
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+Redirected to http://0.0.0.0:3000/articles/3
+Completed 302 Found in 6ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:42:32 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (1.7ms)
+  Rendered articles/show.html.erb within layouts/application (12.6ms)
+Completed 200 OK in 52ms (Views: 46.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:42:34 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (4.5ms)
+  Rendered articles/edit.html.erb within layouts/application (9.9ms)
+Completed 200 OK in 61ms (Views: 52.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:42:38 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (4.7ms)
+  Rendered articles/edit.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 54ms (Views: 48.1ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/articles/3" for 127.0.0.1 at 2018-05-28 22:42:42 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dUJUpbYcJYa9GiuevOzMx162P17jA6zvdJOb3/UbH3Wm7f9HEdY59R2z9K9kuvjISEggib392pDXoJj7jaapEA==", "article"=>{"title"=>"Third Blog Post", "body"=>"I'm yet another step closer to creating my first blog from scratch. This is getting exciting.", "tag_list"=>"tagtest"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:41
+Unpermitted parameter: :tag_list
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+Redirected to http://0.0.0.0:3000/articles/3
+Completed 302 Found in 5ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:42:42 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (1.9ms)
+  Rendered articles/show.html.erb within layouts/application (12.7ms)
+Completed 200 OK in 55ms (Views: 49.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:42:44 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (1.6ms)
+  Rendered articles/show.html.erb within layouts/application (16.3ms)
+Completed 200 OK in 57ms (Views: 51.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:43:15 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (21.2ms)
+  Rendered articles/edit.html.erb within layouts/application (26.5ms)
+Completed 200 OK in 80ms (Views: 57.9ms | ActiveRecord: 3.8ms)
+
+
+Started PATCH "/articles/3" for 127.0.0.1 at 2018-05-28 22:43:20 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KJKctfoo6rXeNpv9EjxjMKo9o3o47aRCOitaCN7ZkC+6uh5jOhnHl7vB0AVuE5xdmZrda4ksdqBYoC6eGHL3Tw==", "article"=>{"title"=>"Third Blog Post", "body"=>"I'm yet another step closer to creating my first blog from scratch. This is getting exciting.", "tag_list"=>"ruby, technology"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:41
+Unpermitted parameter: :tag_list
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+Redirected to http://0.0.0.0:3000/articles/3
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:43:20 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (2.2ms)
+  Rendered articles/show.html.erb within layouts/application (13.9ms)
+Completed 200 OK in 66ms (Views: 48.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:44:21 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (2.7ms)
+  Rendered articles/show.html.erb within layouts/application (16.9ms)
+Completed 200 OK in 83ms (Views: 49.6ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:44:22 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  Rendered articles/_form.html.erb (18.5ms)
+  Rendered articles/edit.html.erb within layouts/application (22.6ms)
+Completed 500 Internal Server Error in 45ms (ActiveRecord: 0.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_list' for #<Article:0x007fec3235d1c8>
+Did you mean?  tag_list=):
+    14:   </p>
+    15:   <p>
+    16:     <%= f.label :tag_list %><br />
+    17:     <%= f.text_field :tag_list %>
+    18:   </p>
+    19:   <p>
+    20:     <%= f.submit %>
+  
+app/views/articles/_form.html.erb:17:in `block in _app_views_articles__form_html_erb__3601889958789392640_70326214295620'
+app/views/articles/_form.html.erb:1:in `_app_views_articles__form_html_erb__3601889958789392640_70326214295620'
+app/views/articles/edit.html.erb:3:in `_app_views_articles_edit_html_erb___2334997529527921427_70326214500180'
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:44:42 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (19.7ms)
+  Rendered articles/edit.html.erb within layouts/application (23.8ms)
+Completed 200 OK in 78ms (Views: 56.8ms | ActiveRecord: 3.1ms)
+
+
+Started PATCH "/articles/3" for 127.0.0.1 at 2018-05-28 22:44:46 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Q6gMHSD+yx9ZQe5jQmydL2KarPBbVLlMxlTgB+gj1a+QB6f/hzTXbPnoMVKaOqkgdGSzJwWqzzNlZ+MjkJ5jyg==", "article"=>{"title"=>"Third Blog Post", "body"=>"I'm yet another step closer to creating my first blog from scratch. This is getting exciting.", "tag_list"=>"ruby, technology"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:41
+Unpermitted parameter: :tag_list
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+Redirected to http://0.0.0.0:3000/articles/3
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:44:46 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (2.0ms)
+  Rendered articles/show.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 66ms (Views: 49.0ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:44:47 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (5.0ms)
+  Rendered articles/edit.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 56ms (Views: 47.6ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/articles/3" for 127.0.0.1 at 2018-05-28 22:44:51 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wW3+BXf0j6mFtQasUyaKhvA6ChAKc5S5ZXTtbOpDoqRTRXzTt8Wii+BCTVQvCXXrw510AbuyRlsH/5n6LOjFxA==", "article"=>{"title"=>"Third Blog Post", "body"=>"I'm yet another step closer to creating my first blog from scratch. This is getting exciting.", "tag_list"=>"ruby, technology"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:41
+Unpermitted parameter: :tag_list
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+Redirected to http://0.0.0.0:3000/articles/3
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:44:51 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (1.7ms)
+  Rendered articles/show.html.erb within layouts/application (12.1ms)
+Completed 200 OK in 54ms (Views: 47.8ms | ActiveRecord: 0.5ms)
+
+
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" ORDER BY "articles"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ? LIMIT ?[0m  [["article_id", 11], ["LIMIT", 11]]
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "ruby"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTag Create (0.7ms)[0m  [1m[32mINSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "ruby"], ["created_at", "2018-05-29 05:52:52.777451"], ["updated_at", "2018-05-29 05:52:52.777451"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "technology"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTag Create (0.7ms)[0m  [1m[32mINSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "technology"], ["created_at", "2018-05-29 05:52:52.783424"], ["updated_at", "2018-05-29 05:52:52.783424"]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mArticle Create (0.9ms)[0m  [1m[32mINSERT INTO "articles" ("title", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "A Sample Article for Tagging!"], ["body", "Great article goes here"], ["created_at", "2018-05-29 05:52:52.808642"], ["updated_at", "2018-05-29 05:52:52.808642"]]
+  [1m[36mTagging Create (0.4ms)[0m  [1m[32mINSERT INTO "taggings" ("tag_id", "article_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["tag_id", 3], ["article_id", 12], ["created_at", "2018-05-29 05:52:52.812724"], ["updated_at", "2018-05-29 05:52:52.812724"]]
+  [1m[36mTagging Create (0.1ms)[0m  [1m[32mINSERT INTO "taggings" ("tag_id", "article_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["tag_id", 4], ["article_id", 12], ["created_at", "2018-05-29 05:52:52.814677"], ["updated_at", "2018-05-29 05:52:52.814677"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ? LIMIT ?[0m  [["tag_id", 3], ["LIMIT", 11]]
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:56:06 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:10
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (2.4ms)
+  Rendered articles/show.html.erb within layouts/application (31.9ms)
+Completed 200 OK in 99ms (Views: 64.8ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/articles/3/edit" for 127.0.0.1 at 2018-05-28 22:56:09 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:37
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/models/article.rb:7
+  Rendered articles/_form.html.erb (6.0ms)
+  Rendered articles/edit.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 61ms (Views: 51.7ms | ActiveRecord: 0.6ms)
+
+
+Started PATCH "/articles/3" for 127.0.0.1 at 2018-05-28 22:56:13 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9eC6vMgmJy8KORhxgUxU2uASPi38JsXZlEd+7HsELlxnyDhqCBcKDW/OU4n9Y6u307VAPE3nFzv2zAp6va9JPA==", "article"=>{"title"=>"Third Blog Post", "body"=>"I'm yet another step closer to creating my first blog from scratch. This is getting exciting.", "tag_list"=>"tagtest"}, "commit"=>"Update Article", "id"=>"3"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:41
+Unpermitted parameter: :tag_list
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:42
+Redirected to http://0.0.0.0:3000/articles/3
+Completed 302 Found in 6ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-05-28 22:56:13 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  ↳ app/views/articles/show.html.erb:10
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (2.1ms)
+  Rendered articles/show.html.erb within layouts/application (13.4ms)
+Completed 200 OK in 51ms (Views: 45.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-28 22:57:18 -0700
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 42ms (Views: 37.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2018-05-28 22:57:20 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered articles/show.html.erb within layouts/application (161.0ms)
+Completed 500 Internal Server Error in 185ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (undefined method `tag_path' for #<#<Class:0x007fec30d264e0>:0x007fec2953fa08>
+Did you mean?  image_path):
+    2: <p>
+    3:   Tags:
+    4:   <% @article.tags.each do |tag| %>
+    5:     <%= link_to tag.name, tag_path(tag) %>
+    6:   <% end %>
+    7: </p>
+    8: <p><%= @article.body %></p>
+  
+app/views/articles/show.html.erb:5:in `block in _app_views_articles_show_html_erb__295002967568924560_70326198463660'
+app/views/articles/show.html.erb:4:in `_app_views_articles_show_html_erb__295002967568924560_70326198463660'
+Started GET "/articles/1" for 127.0.0.1 at 2018-05-28 23:01:11 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:10
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:11
+  Rendered collection of articles/_comment.html.erb [2 times] (1.1ms)
+  Rendered comments/_form.html.erb (3.4ms)
+  Rendered articles/show.html.erb within layouts/application (36.5ms)
+Completed 200 OK in 210ms (Views: 177.3ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/tags/1" for 127.0.0.1 at 2018-05-28 23:01:13 -0700
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tags_controller.rb:4
+  Rendering tags/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?[0m  [["tag_id", 1]]
+  ↳ app/views/tags/show.html.erb:4
+  Rendered tags/show.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 59ms (Views: 46.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-28 23:01:26 -0700
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 54ms (Views: 50.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-05-28 23:01:28 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 2]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  ↳ app/views/articles/show.html.erb:10
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  ↳ app/views/articles/show.html.erb:11
+  Rendered collection of articles/_comment.html.erb [1 times] (1.2ms)
+  Rendered comments/_form.html.erb (2.3ms)
+  Rendered articles/show.html.erb within layouts/application (18.3ms)
+Completed 200 OK in 78ms (Views: 68.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles/12" for 127.0.0.1 at 2018-05-28 23:01:36 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:9
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 12]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  ↳ app/views/articles/show.html.erb:10
+  Rendered collection of articles/_comment.html.erb [0 times] (0.0ms)
+  Rendered comments/_form.html.erb (2.4ms)
+  Rendered articles/show.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 77ms (Views: 66.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/tags/4" for 127.0.0.1 at 2018-05-28 23:01:37 -0700
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/tags_controller.rb:4
+  Rendering tags/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?[0m  [["tag_id", 4]]
+  ↳ app/views/tags/show.html.erb:4
+  Rendered tags/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 59ms (Views: 49.3ms | ActiveRecord: 0.6ms)
+
+
