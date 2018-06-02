@@ -1,0 +1,36 @@
+$primary_color: #2F1;
+
+body {
+  background-color: $primary_color;
+  font: {
+    family: Verdana, Helvetica, Arial;
+    size: 14px;
+  }
+}
+
+a {
+  color: #AAA;
+  img {
+    border: none;
+  }
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+#container {
+  width: 75%;
+  margin: 0 auto;
+  background: #aaa;
+  padding: 20px 80px;
+  border: solid 1px black;
+  margin-top: 20px;
+}
+
+#content {
+  clear: both;
+  padding-top: 20px;
+}
